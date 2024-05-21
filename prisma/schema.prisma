@@ -29,7 +29,7 @@ model User {
   password           String?
   role               UserRole               @default(USER)
   accounts           Account[]
-  isTwoFactorEnabled Boolean                @default(false)
+  isTwoFactorEnabled Boolean                @default(true)
   twoConfirmation    TwoFactorConfirmation?
 
   @@map("users")
