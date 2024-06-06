@@ -6,7 +6,7 @@ interface FormErrorsProps {
 	message?: string;
 }
 
-const FormErrors = ({ message }: FormErrorsProps) => {
+const FormError = ({ message }: FormErrorsProps) => {
 	if (!message) return null;
 	return (
 		<div className='flex items-center gap-x-2 text-sm text-destructive bg-destructive/15 p-3 rounded-md'>
@@ -16,4 +16,4 @@ const FormErrors = ({ message }: FormErrorsProps) => {
 	);
 };
 
-export default FormErrors;
+export default FormError;

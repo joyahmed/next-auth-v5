@@ -1,8 +1,6 @@
 import prisma from '@/prisma/prisma';
 
 export const getVerificationTokenByToken = async (token: string) => {
-
-
 	try {
 		const verificationToken =
 			await prisma.verificationToken.findUnique({

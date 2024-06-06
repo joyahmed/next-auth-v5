@@ -16,7 +16,7 @@ import {
 	FormLabel,
 	FormMessage
 } from '@/components/ui/form';
-import FormErrors from '../FormErrors';
+import FormErrors from '../FormError';
 import FormSuccess from '../FormSuccess';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';

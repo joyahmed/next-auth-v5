@@ -1,8 +1,8 @@
-import LoginForm from '@/components/auth/LoginForm';
+import AuthForm from '@/components/auth/AuthForm';
 import React from 'react';
 
 const Login = () => {
-	return <LoginForm />;
+	return <AuthForm {...{ variant: 'login' }} />;
 };
 
 export default Login;

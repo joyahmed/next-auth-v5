@@ -8,35 +8,46 @@ import React from 'react';
 
 const Navbar = () => {
 	const pathname = usePathname();
+
+	const navItems = [
+		{
+			title: 'Server',
+			link: '/server',
+			variant: pathname == '/server' ? 'default' : 'outline'
+		},
+		{
+			title: 'Settings',
+			link: '/settings',
+			variant: pathname == '/settings' ? 'default' : 'outline'
+		},
+		{
+			title: 'Client',
+			link: '/client',
+			variant: pathname == '/client' ? 'default' : 'outline'
+		},
+		{
+			title: 'Admin',
+			link: '/admin',
+			variant: pathname == '/admin' ? 'default' : 'outline'
+		}
+	];
+
 	return (
 		<nav className='flex justify-center items-center p-4 rounded w-screen shadow-xl fixed top-0 bg-transparent'>
 			<div className='flex items-center justify-between max-w-screen-lg w-screen'>
 				<div className='flex gap-x-2'>
-					<Button
-						asChild
-						variant={pathname === '/server' ? 'default' : 'outline'}
-						className='focus:outline-0'
-					>
-						<Link href='/server'>Server</Link>
-					</Button>
-					<Button
-						asChild
-						variant={pathname === '/settings' ? 'default' : 'outline'}
-					>
-						<Link href='/settings'>Settings</Link>
-					</Button>
-					<Button
-						asChild
-						variant={pathname === '/client' ? 'default' : 'outline'}
-					>
-						<Link href='/client'>Client </Link>
-					</Button>
-					<Button
-						asChild
-						variant={pathname === '/admin' ? 'default' : 'outline'}
-					>
-						<Link href='/admin'>Admin </Link>
-					</Button>
+					{navItems.map(item => (
+						<Button
+							key={item.title}
+							asChild
+							variant={
+								pathname === `${item.link}` ? 'default' : 'outline'
+							}
+							className='focus:outline-0'
+						>
+							<Link href={item.link}>{item.title}</Link>
+						</Button>
+					))}
 				</div>
 				<UserButton />
 			</div>

@@ -31,8 +31,6 @@ export const loginAction = async (
 
 	const { email, password, code } = validatedFields.data;
 
-	console.log(`code => =>`, code);
-
 	const existingUser = await getUserByEmail(email);
 
 	if (
@@ -41,6 +39,15 @@ export const loginAction = async (
 		!existingUser.password
 	) {
 		return { error: 'Email does not exist!' };
+	}
+
+	const passwordMatches = await bcrypt.compare(
+		password,
+		existingUser.password
+	);
+
+	if (!passwordMatches) {
+		return { error: 'Incorrect password!' };
 	}
 
 	if (!existingUser.emailVerified) {

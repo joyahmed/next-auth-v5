@@ -20,7 +20,7 @@ import {
 	FormMessage
 } from '@/components/ui/form';
 
-import FormErrors from '@/components/FormErrors';
+import FormError from '@/components/FormError';
 import FormSuccess from '@/components/FormSuccess';
 import { Input } from '@/components/ui/input';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
@@ -87,7 +87,7 @@ const SettingsPage = () => {
 								)}
 							/>
 						</div>
-						<FormErrors message={error} />
+						<FormError message={error} />
 						<FormSuccess message={success} />
 						<Button disabled={isPending} type='submit'>
 							Save

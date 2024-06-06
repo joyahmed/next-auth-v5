@@ -12,17 +12,51 @@ export const LoginSchema = z.object({
 	code: z.optional(z.string())
 });
 
-export const RegisterSchema = z.object({
-	email: z.string().email({
-		message: 'Email is required'
-	}),
-	password: z
-		.string()
-		.min(6, { message: 'Minimum 6 characters required' }),
-	name: z.string().min(3, {
-		message: 'Name is required'
+export const RegisterSchema = z
+	.object({
+		email: z.string().email({
+			message: 'Invalid email format'
+		}),
+		password: z
+			.string()
+			.min(10, {
+				message: 'Password must be at least 10 characters long'
+			})
+			.regex(/[A-Z]/, {
+				message: 'Password must contain at least one uppercase letter'
+			})
+			.regex(/[0-9]/, {
+				message: 'Password must contain at least one number'
+			})
+			.regex(/[!@#$%^&*(),.?":{}|<>]/, {
+				message: 'Password must contain at least one symbol'
+			}),
+		confirmPassword: z
+			.string()
+			.min(6, { message: 'Passwords must match' }),
+		name: z.string().min(3, {
+			message: 'Name is required'
+		})
 	})
-});
+	.refine(data => data.password === data.confirmPassword, {
+		message: "Passwords don't match",
+		path: ['confirmPassword']
+	});
+
+// export const RegisterSchema = z.object({
+// 	email: z.string().email({
+// 		message: 'Email is required'
+// 	}),
+// 	password: z
+// 		.string()
+// 		.min(6, { message: 'Minimum 6 characters required' }),
+// 	confirmPassword: z
+// 		.string()
+// 		.min(6, { message: 'Passwords must match' }),
+// 	name: z.string().min(3, {
+// 		message: 'Name is required'
+// 	})
+// });
 
 export const ResetPasswordSchema = z.object({
 	email: z.string().email({
@@ -33,5 +67,5 @@ export const ResetPasswordSchema = z.object({
 export const NewPasswordSchema = z.object({
 	password: z
 		.string()
-		.min(6, { message: 'Minimum 6 characters required' })
+		.min(6, { message: 'Minimum 10 characters required' })
 });

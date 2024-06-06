@@ -83,7 +83,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
 			token.name = existingUser.name;
 			token.email = existingUser.email;
 			token.role = existingUser.role;
-			token.isTwoFactorEanbled = existingUser.isTwoFactorEnabled;
+			token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled;
 
 			return token;
 		}
