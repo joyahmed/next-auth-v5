@@ -13,14 +13,17 @@ import {
 	FormLabel,
 	FormMessage
 } from '@/components/ui/form';
+import usePasswordVisibilityToggle from '@/hooks/usePasswordVisibilityToggle';
 import FormError from '../FormError';
 import FormSuccess from '../FormSuccess';
+import TogglePassword from '../TogglePassword';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 
 const AuthForm = ({ variant }: { variant: 'login' | 'register' }) => {
 	const { isPending, showTwoFactor, error, success, form, onSubmit } =
 		useAuthForm({ variant });
+	const { show, togglePassText } = usePasswordVisibilityToggle();
 
 	const formItems: {
 		name: 'name' | 'email' | 'password' | 'confirmPassword' | 'code';
@@ -46,14 +49,14 @@ const AuthForm = ({ variant }: { variant: 'login' | 'register' }) => {
 		{
 			name: 'password',
 			title: 'Password',
-			type: 'password',
+			type: show.showPassword ? 'text' : 'password',
 			placeholder: '******',
 			show: !showTwoFactor
 		},
 		{
 			name: 'confirmPassword',
 			title: 'Confirm Password',
-			type: 'password',
+			type: show.showConfirmPassword ? 'text' : 'password',
 			placeholder: '******',
 			show: variant === 'register'
 		},
@@ -95,13 +98,34 @@ const AuthForm = ({ variant }: { variant: 'login' | 'register' }) => {
 									render={({ field }) => (
 										<FormItem>
 											<FormLabel>{item.title}</FormLabel>
-											<FormControl>
-												<Input
-													{...field}
-													disabled={isPending}
-													placeholder={item.placeholder}
-												/>
-											</FormControl>
+											<div className='relative flex flex-col justify-center w-full'>
+												<FormControl>
+													<Input
+														{...field}
+														disabled={isPending}
+														placeholder={item.placeholder}
+														type={item.type}
+													/>
+												</FormControl>
+												{item.name === 'password' ||
+												item.name === 'confirmPassword' ? (
+													<TogglePassword
+														{...{
+															color: '#000',
+															variant:
+																item.name === 'password'
+																	? show.showPassword
+																	: show.showConfirmPassword,
+															onClick: () =>
+																togglePassText(
+																	item.name === 'password'
+																		? 'showPassword'
+																		: 'showConfirmPassword'
+																)
+														}}
+													/>
+												) : null}
+											</div>
 											{item.name === 'password' ? (
 												<Button
 													size='sm'
