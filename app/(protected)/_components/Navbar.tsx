@@ -11,14 +11,14 @@ const Navbar = () => {
 
 	const navItems = [
 		{
-			title: 'Server',
-			link: '/server',
-			variant: pathname == '/server' ? 'default' : 'outline'
-		},
-		{
 			title: 'Settings',
 			link: '/settings',
 			variant: pathname == '/settings' ? 'default' : 'outline'
+		},
+		{
+			title: 'Server',
+			link: '/server',
+			variant: pathname == '/server' ? 'default' : 'outline'
 		},
 		{
 			title: 'Client',

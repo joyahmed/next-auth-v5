@@ -1,10 +1,12 @@
 /**
  * An array of routes that are accessible to the public
  * These routes do not require authentication
- * @type {string[]}
+ * @type {string[] | string}
  */
 
-export const publicRoutes = ['/', '/auth/new-verification'];
+export const homeRoute = '/'
+
+export const publicRoute = '/auth/new-verification';
 
 /**
  * An array of routes that are used for authentication
